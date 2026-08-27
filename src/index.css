@@ -1,0 +1,109 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+/* ── Configure class-based dark mode for Tailwind v4 ──────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── CSS Theme Variables ──────────────────────────────────── */
+:root {
+  /* Light mode — high contrast */
+  --bg-base:        #f1f5f9;
+  --bg-nav:         rgba(255,255,255,0.90);
+  --bg-sidebar:     #ffffff;
+  --bg-card:        #ffffff;
+  --bg-card-2:      #f8fafc;
+  --bg-input:       #ffffff;
+  --bg-elevated:    #e2e8f0;
+  --border:         rgba(0,0,0,0.10);
+  --border-strong:  #94a3b8;
+  --text-1:         #0f172a;
+  --text-2:         #1e293b;
+  --text-3:         #475569;
+  --shadow-nav:     0 1px 4px rgba(0,0,0,0.10);
+}
+
+:root.dark {
+  /* Dark mode */
+  --bg-base:        #0f172a;
+  --bg-nav:         rgba(15,23,42,0.85);
+  --bg-sidebar:     #0f172a;
+  --bg-card:        rgba(30,41,59,0.7);
+  --bg-card-2:      rgba(15,23,42,0.5);
+  --bg-input:       #0f172a;
+  --bg-elevated:    #1e293b;
+  --border:         rgba(148,163,184,0.1);
+  --border-strong:  #334155;
+  --text-1:         #f1f5f9;
+  --text-2:         #94a3b8;
+  --text-3:         #64748b;
+  --shadow-nav:     0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* ── Base Styles ──────────────────────────────────────────── */
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-1);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg-elevated); }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+}
+
+/* ── Theme-aware utility classes ─────────────────────────── */
+.theme-bg       { background-color: var(--bg-base); }
+.theme-nav      { background-color: var(--bg-nav); backdrop-filter: blur(12px); }
+.theme-sidebar  { background-color: var(--bg-sidebar); border-color: var(--border); }
+.theme-card     { background-color: var(--bg-card); border: 1px solid var(--border); }
+.theme-card-2   { background-color: var(--bg-card-2); }
+.theme-input    { background-color: var(--bg-input); border-color: var(--border-strong); color: var(--text-1); }
+.theme-elevated { background-color: var(--bg-elevated); }
+.theme-border   { border-color: var(--border); }
+.theme-border-strong { border-color: var(--border-strong); }
+.theme-text-1   { color: var(--text-1); }
+.theme-text-2   { color: var(--text-2); }
+.theme-text-3   { color: var(--text-3); }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes fadeIn    { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+@keyframes slideIn   { from { opacity:0; transform:translateX(20px); } to { opacity:1; transform:translateX(0); } }
+@keyframes spin      { to { transform:rotate(360deg); } }
+
+.animate-fade-in  { animation: fadeIn 0.3s ease-out; }
+.animate-slide-in { animation: slideIn 0.3s ease-out; }
+
+/* ── Component overrides ──────────────────────────────────── */
+.progress-bar-fill { transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.chat-bubble-user {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 18px 18px 4px 18px;
+}
+.chat-bubble-bot {
+  background: var(--bg-elevated);
+  border-radius: 18px 18px 18px 4px;
+  color: var(--text-1);
+}
